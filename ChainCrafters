@@ -1,0 +1,26 @@
+# scripts/data_analysis.py
+
+import pandas as pd
+
+def analyze_transaction_data(transactions):
+    """
+    Analyze transaction data.
+
+    :param transactions: List of transaction dictionaries
+    :return: DataFrame with transaction data
+    """
+    df = pd.DataFrame(transactions)
+    df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s')
+    return df.describe()
+
+def plot_transaction_data(df):
+    """
+    Plot transaction data.
+
+    :param df: DataFrame with transaction data
+    """
+    df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s')
+    df.plot(x='timestamp', y='value', kind='line', title='Transaction Value Over Time')
+    plt.xlabel('Time')
+    plt.ylabel('Value')
+    plt.show()
